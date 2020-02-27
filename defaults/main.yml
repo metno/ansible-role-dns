@@ -2,5 +2,5 @@
 dns_servers:
   - 8.8.8.8
   - 1.1.1.1
-dns_dnssec: true
+dns_dnssec: false
 dns_domains: []

@@ -30,6 +30,7 @@ Role Variables
 
 * `dns_servers` --- list of IPs for DNS servers, default `['8.8.8.8', '1.1.1.1']`
 * `dns_dnssec` --- boolean value to enable DNSSEC, default `false`.
+    DNSSEC is only configured for `systemd-resolved`.
 * `dns_domains` --- list of search domains, default `[]`
 
 Dependencies
