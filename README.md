@@ -45,10 +45,16 @@ Variables are kept in the `host_vars` or `group_vars` folder usually. Defining e
 
     - hosts: servers
       vars:
-      roles: user
-      dns_servers:
-        - 8.8.8.8
-        - 1.1.1.1
+      roles:
+      - role: dns
+        dns_servers:
+          - 8.8.8.8
+          - 1.1.1.1
+        dns_dnssec: true
+        dns_domains:
+          - foo.lan
+          - bar.lan
+
 
 Testing
 -------

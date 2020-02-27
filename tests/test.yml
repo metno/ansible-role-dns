@@ -10,6 +10,6 @@
       dns_dnssec: true
       dns_domains:
         - foo.lan
-        - bar.lan2
+        - bar.lan
 
 
