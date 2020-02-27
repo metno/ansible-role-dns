@@ -3,6 +3,8 @@ dns
 
 Configure DNS setup for a Linux server.
 
+Uses `systemd-resolved` or `network-manager` if installed, else it removes `resolvconf` package and configures `/etc/resolv.conf` directly.
+
 
 Version
 -------
@@ -18,7 +20,7 @@ This role is limited to:
 * Ubuntu 12.04
 * Ubuntu 14.04
 * Ubuntu 16.04
-* Ubuntu 18.04 --- `systemd-resolved`
+* Ubuntu 18.04
 * CentOS 6
 * CentOS 7
 * CentOS 8
@@ -27,7 +29,7 @@ Role Variables
 --------------
 
 * `dns_servers` --- list of IPs for DNS servers, default `['8.8.8.8', '1.1.1.1']`
-* `dns_dnssec` --- boolean value to enable DNSSEC, default `true`.
+* `dns_dnssec` --- boolean value to enable DNSSEC, default `false`.
 * `dns_domains` --- list of search domains, default `[]`
 
 Dependencies
