@@ -1,0 +1,35 @@
+# vim: ai et ts=2 st=2 sw=2 :
+---
+- name: configure domains for network manager
+  ini_file:
+    path: /etc/NetworkManager/conf.d/global-dns.conf
+    section: global-dns
+    option: searches
+    value: '{{ dns_domains | join(",") }}'
+    no_extra_spaces: true
+  register: conf_nm_domains
+
+- name: configure domains for network manager
+  ini_file:
+    path: /etc/NetworkManager/conf.d/global-dns.conf
+    section: global-dns-domain-*
+    option: servers
+    value: '{{ dns_servers | join(",") }}'
+    no_extra_spaces: true
+  register: conf_nm_dns
+
+- name: check if network manager runs
+  shell: pgrep NetworkManager
+  failed_when: false
+  changed_when: false
+  register: network_manager_running
+
+- name: reload network manager
+  service:
+    name: NetworkManager
+    state: reloaded
+  when:
+    - conf_nm_dns or
+      conf_nm_domains
+    - network_manager_running.rc == 0
+

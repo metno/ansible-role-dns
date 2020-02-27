@@ -1,0 +1,28 @@
+galaxy_info:
+  author: Arnulf Heimsbakk <aheimsbakk@met.no>
+  description: Configure resolv.conf on all Linux
+  company: MET Norway
+
+  license: GPL-2.0
+
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: CentOS
+      versions:
+        - 8
+        - 7
+        - 6
+    - name: Ubuntu
+      versions:
+        - 18.04
+        - 16.04
+        - 14.04
+        - 12.04
+
+
+  galaxy_tags:
+    - dns
+    - resolv
+
+dependencies: []

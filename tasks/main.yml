@@ -1,0 +1,72 @@
+---
+- name: check if we're running supported os
+  assert:
+    fail_msg: "{{ role_name }} only supports ubuntu versions 12, 14, 16, 18 and centos versions 6, 7!"
+    success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
+    quiet: "{{ not ansible_check_mode }}"
+    that:
+      ( ansible_distribution == "Ubuntu" and ansible_distribution_version|int in [12, 14, 16, 18] )
+      or ( ansible_distribution == "CentOS" and ansible_distribution_major_version|int in [6, 7, 8] )
+
+- name: install dependencies centos 6 and 7
+  yum:
+    name:
+      - libselinux-python
+      - yum-utils
+  when:
+    - ansible_distribution_major_version|int in [6, 7]
+    - ansible_distribution == "CentOS"
+  check_mode: false
+
+- name: install dependencies centos 8
+  dnf:
+    name:
+      - python3-libselinux
+      - dnf-utils
+  when:
+    - ansible_distribution_major_version|int == 8
+    - ansible_distribution == "CentOS"
+  check_mode: false
+
+## systemd-resolved
+
+- name: check if systemd-resolved config exists
+  stat:
+    path: /etc/systemd/resolved.conf
+  register: systemd_resolved_config
+
+- name: update DNS servers for systemd-resolvd
+  include: systemd-resolved.yml
+  when: systemd_resolved_config.stat.exists | bool
+
+## network-manager
+
+- name: check if network manager exists
+  stat:
+    path: /etc/NetworkManager/conf.d
+  register: network_manager_config
+
+- name: configure network manager
+  include: network-manager.yml
+  when: network_manager_config.stat.exists
+
+## resolvconf and others
+
+- name: check if network manager runs
+  shell: pgrep NetworkManager
+  failed_when: false
+  changed_when: false
+  register: network_manager_running
+
+- name: check if network manager runs
+  shell: pgrep systemd-resolve
+  failed_when: false
+  changed_when: false
+  register: systemd_resolved_running
+
+- name: resolvconf configuration
+  include: resolvconf.yml
+  when:
+    - network_manager_running.rc != 0
+    - systemd_resolved_running.rc != 0
+

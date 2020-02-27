@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: root
+  become: true
+  roles:
+    - role: ../../.
+      dns_servers:
+        - 8.8.8.8
+        - 1.1.1.1
+      dns_dnssec: true
+      dns_domains:
+        - foo.lan
+        - bar.lan2
+
+
