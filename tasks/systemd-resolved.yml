@@ -39,7 +39,7 @@
   register: conf_domains
 
 - name: check if network manager runs
-  shell: pgrep systemd-resolve
+  shell: pgrep systemd-resolve # noqa 305
   failed_when: false
   changed_when: false
   register: systemd_resolved_running
