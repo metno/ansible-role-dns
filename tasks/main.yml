@@ -34,6 +34,7 @@
   stat:
     path: /etc/systemd/resolved.conf
   register: systemd_resolved_config
+  check_mode: false
 
 - name: update DNS servers for systemd-resolvd
   include: systemd-resolved.yml
@@ -45,6 +46,7 @@
   stat:
     path: /etc/NetworkManager/conf.d
   register: network_manager_config
+  check_mode: false
 
 - name: configure network manager
   include: network-manager.yml
@@ -57,12 +59,14 @@
   failed_when: false
   changed_when: false
   register: network_manager_running
+  check_mode: false
 
 - name: check if network manager runs
   shell: pgrep systemd-resolve # noqa 305
   failed_when: false
   changed_when: false
   register: systemd_resolved_running
+  check_mode: false
 
 - name: resolvconf configuration
   include: resolvconf.yml

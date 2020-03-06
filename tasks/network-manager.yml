@@ -23,6 +23,7 @@
   failed_when: false
   changed_when: false
   register: network_manager_running
+  check_mode: false
 
 - name: reload network manager
   service:

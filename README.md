@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.0.1` --- fix run in `--check`
 * `1.0.0` --- initial version
 * `master` --- latest development version
 
