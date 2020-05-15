@@ -30,7 +30,7 @@
     name: NetworkManager
     state: reloaded
   when:
-    - conf_nm_dns or
-      conf_nm_domains
+    - conf_nm_dns is changed or
+      conf_nm_domains is changed
     - network_manager_running.rc == 0
 
