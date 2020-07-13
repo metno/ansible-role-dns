@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.0.3` --- prepare for github
 * `1.0.2` --- fixed always reload of network manger
 * `1.0.1` --- fix run in `--check`
 * `1.0.0` --- initial version
@@ -77,7 +78,7 @@ Remove test VMs.
 License
 -------
 
-GPLv2+
+GPLv2
 
 Author Information
 ------------------
