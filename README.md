@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.1.0` --- added ubuntu focal, 20.04
 * `1.0.4` --- tested with Ansible 2.9.11
 * `1.0.3` --- prepare for github
 * `1.0.2` --- fixed always reload of network manger
@@ -25,6 +26,7 @@ This role is limited to:
 * Ubuntu 14.04
 * Ubuntu 16.04
 * Ubuntu 18.04
+* Ubuntu 20.04
 * CentOS 6
 * CentOS 7
 * CentOS 8
