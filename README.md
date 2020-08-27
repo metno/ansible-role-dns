@@ -9,7 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
-* `1.1.0` --- fixed lint warnings
+* `1.1.1` --- fixed lint warnings
 * `1.1.0` --- added ubuntu focal, 20.04
 * `1.0.4` --- tested with Ansible 2.9.11
 * `1.0.3` --- prepare for github
