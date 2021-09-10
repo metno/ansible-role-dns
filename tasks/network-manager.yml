@@ -6,6 +6,7 @@
     section: global-dns
     option: searches
     value: '{{ dns_domains | join(",") }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_nm_domains
 
@@ -15,6 +16,7 @@
     section: global-dns-domain-*
     option: servers
     value: '{{ dns_servers | join(",") }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_nm_dns
 

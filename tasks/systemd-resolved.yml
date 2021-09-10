@@ -6,6 +6,7 @@
     section: Resolve
     option: DNS
     value: '{{ dns_servers[0] }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_dns
   when: dns_servers | length > 0
@@ -16,6 +17,7 @@
     section: Resolve
     option: FallbackDNS
     value: '{{ dns_servers[1] }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_fallbackdns
   when: dns_servers | length > 1
@@ -26,6 +28,7 @@
     section: Resolve
     option: DNSSEC
     value: '{{ "yes" if dns_dnssec else "no" }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_dnssec
 
@@ -35,6 +38,7 @@
     section: Resolve
     option: Domains
     value: '{{ dns_domains | join(" ") }}'
+    mode: '0644'
     no_extra_spaces: true
   register: conf_domains
 
