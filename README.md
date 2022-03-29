@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.4.0` --- add jammy support + remove centos8 support
 * `1.3.0` --- add rhel8 support + remove trusty and centos6
 * `1.2.0` --- remove ubuntu precise from testing
 * `1.1.1` --- fixed lint warnings
@@ -28,8 +29,8 @@ This role is limited to:
 * Ubuntu 16.04
 * Ubuntu 18.04
 * Ubuntu 20.04
+* Ubuntu 22.04
 * CentOS 7
-* CentOS 8
 * RHEL 8
 
 Role Variables
