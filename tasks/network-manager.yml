@@ -21,7 +21,7 @@
   register: conf_nm_dns
 
 - name: check if network manager runs
-  shell: pgrep NetworkManager # noqa 305
+  shell: pgrep NetworkManager
   failed_when: false
   changed_when: false
   register: network_manager_running
@@ -35,4 +35,3 @@
     - conf_nm_dns is changed or
       conf_nm_domains is changed
     - network_manager_running.rc == 0
-

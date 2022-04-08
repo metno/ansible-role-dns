@@ -1,7 +1,11 @@
+# vim: ai et ts=2 st=2 sw=2 :
+---
 galaxy_info:
   author: Arnulf Heimsbakk <aheimsbakk@met.no>
   description: Configure resolv.conf on all Linux
   company: MET Norway
+  role_name: dns
+  namespace: met
 
   license: GPLv2
 
@@ -10,10 +14,11 @@ galaxy_info:
   platforms:
     - name: CentOS
       versions:
-        - 8
         - 7
     - name: Ubuntu
       versions:
+        - 22.04
+        - 20.04
         - 18.04
         - 16.04
     - name: RedHat
