@@ -1,12 +1,12 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
 - name: Remove resolvconfd package
-  package:
+  ansible.builtin.package:
     name: resolvconf
     state: absent
 
 - name: Distribute resolv.conf template
-  template:
+  ansible.builtin.template:
     src: resolv.conf
     dest: /etc/resolv.conf
     mode: 0644

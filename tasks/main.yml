@@ -1,6 +1,6 @@
 ---
 - name: Check if we are running supported os
-  assert:
+  ansible.builtin.assert:
     fail_msg: "{{ role_name }} only supports ubuntu versions 16, 18, 20, 22,  centos versions 7, and rhel version 8!"
     success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
     quiet: "{{ not ansible_check_mode }}"
@@ -10,7 +10,7 @@
       or ( ansible_distribution == "RedHat" and ansible_distribution_major_version|int in [8] )
 
 - name: Install dependencies centos 7
-  yum:
+  ansible.builtin.yum:
     name:
       - libselinux-python
       - yum-utils
@@ -20,7 +20,7 @@
   check_mode: false
 
 - name: Install dependencies centos 8 and rhel 8
-  dnf:
+  ansible.builtin.dnf:
     name:
       - python3-libselinux
       - dnf-utils
@@ -32,45 +32,45 @@
 ## systemd-resolved
 
 - name: Check if systemd-resolved config exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/systemd/resolved.conf
   register: systemd_resolved_config
   check_mode: false
 
 - name: Update DNS servers for systemd-resolvd
-  include: systemd-resolved.yml
+  ansible.builtin.include: systemd-resolved.yml
   when: systemd_resolved_config.stat.exists | bool
 
 ## network-manager
 
 - name: Check if network manager exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/NetworkManager/conf.d
   register: network_manager_config
   check_mode: false
 
 - name: Configure network manager
-  include: network-manager.yml
+  ansible.builtin.include: network-manager.yml
   when: network_manager_config.stat.exists
 
 ## resolvconf and others
 
 - name: Check if network manager runs
-  shell: pgrep NetworkManager
+  ansible.builtin.shell: pgrep NetworkManager
   failed_when: false
   changed_when: false
   register: network_manager_running
   check_mode: false
 
 - name: Check if network manager runs
-  shell: pgrep systemd-resolve
+  ansible.builtin.shell: pgrep systemd-resolve
   failed_when: false
   changed_when: false
   register: systemd_resolved_running
   check_mode: false
 
 - name: Resolvconf configuration
-  include: resolvconf.yml
+  ansible.builtin.include: resolvconf.yml
   when:
     - network_manager_running.rc != 0
     - systemd_resolved_running.rc != 0
