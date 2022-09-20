@@ -1,6 +1,6 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
-- name: add DNS servers
+- name: Add DNS servers
   ini_file:
     path: /etc/systemd/resolved.conf
     section: Resolve
@@ -11,7 +11,7 @@
   register: conf_dns
   when: dns_servers | length > 0
 
-- name: add DNS fallback server
+- name: Add DNS fallback server
   ini_file:
     path: /etc/systemd/resolved.conf
     section: Resolve
@@ -22,7 +22,7 @@
   register: conf_fallbackdns
   when: dns_servers | length > 1
 
-- name: enable DNSSEC
+- name: Enable DNSSEC
   ini_file:
     path: /etc/systemd/resolved.conf
     section: Resolve
@@ -32,7 +32,7 @@
     no_extra_spaces: true
   register: conf_dnssec
 
-- name: add search domains
+- name: Add search domains
   ini_file:
     path: /etc/systemd/resolved.conf
     section: Resolve
@@ -42,14 +42,14 @@
     no_extra_spaces: true
   register: conf_domains
 
-- name: check if network manager runs
+- name: Check if network manager runs
   shell: pgrep systemd-resolve
   failed_when: false
   changed_when: false
   register: systemd_resolved_running
   check_mode: false
 
-- name: reload systemd-resolved
+- name: Reload systemd-resolved
   systemd:
     name: systemd-resolved
     state: restarted

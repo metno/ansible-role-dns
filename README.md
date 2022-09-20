@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.5.0` --- updated for ansible 2.12.9
 * `1.4.0` --- add jammy support + remove centos8 support
 * `1.3.0` --- add rhel8 support + remove trusty and centos6
 * `1.2.0` --- remove ubuntu precise from testing

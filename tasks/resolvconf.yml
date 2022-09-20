@@ -1,11 +1,11 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
-- name: remove resolvconfd package
+- name: Remove resolvconfd package
   package:
     name: resolvconf
     state: absent
 
-- name: distribute resolv.conf template
+- name: Distribute resolv.conf template
   template:
     src: resolv.conf
     dest: /etc/resolv.conf

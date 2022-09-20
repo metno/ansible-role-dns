@@ -1,6 +1,6 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
-- name: configure domains for network manager
+- name: Configure domains for network manager
   ini_file:
     path: /etc/NetworkManager/conf.d/global-dns.conf
     section: global-dns
@@ -10,7 +10,7 @@
     no_extra_spaces: true
   register: conf_nm_domains
 
-- name: configure domains for network manager
+- name: Configure domains for network manager
   ini_file:
     path: /etc/NetworkManager/conf.d/global-dns.conf
     section: global-dns-domain-*
@@ -20,14 +20,14 @@
     no_extra_spaces: true
   register: conf_nm_dns
 
-- name: check if network manager runs
+- name: Check if network manager runs
   shell: pgrep NetworkManager
   failed_when: false
   changed_when: false
   register: network_manager_running
   check_mode: false
 
-- name: reload network manager
+- name: Reload network manager
   service:
     name: NetworkManager
     state: reloaded
