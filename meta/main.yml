@@ -29,4 +29,7 @@ galaxy_info:
     - dns
     - resolv
 
+collections:
+  - "community.general"
+
 dependencies: []
