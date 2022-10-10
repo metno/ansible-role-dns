@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `1.5.0` --- add RHEL9 + CentOS Stream 8 support
 * `1.4.0` --- add jammy support + remove centos8 support
 * `1.3.0` --- add rhel8 support + remove trusty and centos6
 * `1.2.0` --- remove ubuntu precise from testing
@@ -31,7 +32,9 @@ This role is limited to:
 * Ubuntu 20.04
 * Ubuntu 22.04
 * CentOS 7
+* CentOS Stream 8
 * RHEL 8
+* RHEL 9
 
 Role Variables
 --------------
