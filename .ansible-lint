@@ -2,3 +2,5 @@ skip_list:
   - no-handler
   - fqcn-builtins
   - command-instead-of-shell
+  - deprecated-module
+  - '305'
