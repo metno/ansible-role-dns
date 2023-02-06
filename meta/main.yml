@@ -1,6 +1,7 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
 galaxy_info:
+  standalone: true
   author: Arnulf Heimsbakk <aheimsbakk@met.no>
   description: Configure resolv.conf on all Linux
   company: MET Norway
@@ -9,27 +10,26 @@ galaxy_info:
 
   license: GPLv2
 
-  min_ansible_version: 2.8
+  min_ansible_version: "2.12"
 
   platforms:
-    - name: CentOS
+    - name: "Ubuntu"
       versions:
-        - 7
-        - 8
-    - name: Ubuntu
+        - "jammy"
+        - "focal"
+        - "bionic"
+        - "xenial"
+    - name: "EL"
       versions:
-        - 22.04
-        - 20.04
-        - 18.04
-        - 16.04
-    - name: RedHat
-      versions:
-        - 8
-        - 9
-
+        - "7"
+        - "8"
+        - "9"
 
   galaxy_tags:
     - dns
     - resolv
+
+collections:
+  - "community.general"
 
 dependencies: []
