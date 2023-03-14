@@ -18,7 +18,8 @@
   check_mode: false
 
 - name: Update DNS servers for systemd-resolvd
-  ansible.builtin.include: systemd-resolved.yml
+  ansible.builtin.include_tasks:
+    file: 'systemd-resolved.yml'
   when: systemd_resolved_config.stat.exists | bool
 
 ## network-manager
@@ -30,7 +31,8 @@
   check_mode: false
 
 - name: Configure network manager
-  ansible.builtin.include: network-manager.yml
+  ansible.builtin.include_tasks:
+    file: 'network-manager.yml'
   when: network_manager_config.stat.exists
 
 ## resolvconf and others
@@ -50,7 +52,8 @@
   check_mode: false
 
 - name: Resolvconf configuration
-  ansible.builtin.include: resolvconf.yml
+  ansible.builtin.include_tasks:
+    file: 'resolvconf.yml'
   when:
     - network_manager_running.rc != 0
     - systemd_resolved_running.rc != 0

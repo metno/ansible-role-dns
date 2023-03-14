@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `2.0.1` --- bug fix, ansible-lint
 * `2.0.0` --- updated for ansible 2.12.9
 * `1.5.0` --- add RHEL9 + CentOS Stream 8 support
 * `1.4.0` --- add jammy support + remove centos8 support
