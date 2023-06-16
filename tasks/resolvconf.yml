@@ -4,6 +4,7 @@
   ansible.builtin.package:
     name: resolvconf
     state: absent
+  when: ansible_distribution|lower != "fedora"
 
 - name: Distribute resolv.conf template
   ansible.builtin.template:

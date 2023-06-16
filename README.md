@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `2.1.0` --- Initial support for Fedora CoreOS, but with no tests
 * `2.0.1` --- bug fix, ansible-lint
 * `2.0.0` --- updated for ansible 2.12.9
 * `1.5.0` --- add RHEL9 + CentOS Stream 8 support
@@ -37,6 +38,7 @@ This role is limited to:
 * CentOS Stream 8
 * RHEL 8
 * RHEL 9
+* Fedora CoreOS 38
 
 Role Variables
 --------------
@@ -71,6 +73,9 @@ Variables are kept in the `host_vars` or `group_vars` folder usually. Defining e
 
 Testing
 -------
+
+NOTICE: Fedora CoreOS is tested manually, but currently no automatic tests
+are added for FCOS.
 
 Testing the role with Vagrant running on VirtualBox.
 

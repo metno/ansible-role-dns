@@ -8,6 +8,7 @@
       ( ansible_distribution == "Ubuntu" and ansible_distribution_version|int in [16, 18, 20, 22] )
       or ( ansible_distribution == "CentOS" and ansible_distribution_major_version|int in [7, 8] )
       or ( ansible_distribution == "RedHat" and ansible_distribution_major_version|int in [8, 9] )
+      or ( ansible_distribution == "Fedora" and ansible_distribution_major_version|int in [38] )
 
 ## systemd-resolved
 
