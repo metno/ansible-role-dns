@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Test DNS role
+  hosts: all
   remote_user: root
   become: true
   roles:
