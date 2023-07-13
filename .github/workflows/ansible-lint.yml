@@ -1,11 +1,10 @@
 ---
 name: Ansible Lint
-
 on: [push, pull_request]
 
 jobs:
   build:
-
+    name: Ansible Lint
     runs-on: ubuntu-latest
 
     steps:
