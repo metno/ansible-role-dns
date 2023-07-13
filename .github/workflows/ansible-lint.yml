@@ -1,6 +1,6 @@
 ---
 name: Ansible Lint
-on: [push, pull_request]
+on: [push, pull_request] # noqa yaml[truthy]
 
 jobs:
   build:
