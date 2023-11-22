@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `2.1.2` --- allow Fedora CoreOS 39
 * `2.1.1` --- bug fix, ansible-lint
 * `2.1.0` --- Initial support for Fedora CoreOS, but with no tests
 * `2.0.1` --- bug fix, ansible-lint
@@ -40,6 +41,7 @@ This role is limited to:
 * RHEL 8
 * RHEL 9
 * Fedora CoreOS 38
+* Fedora CoreOS 39
 
 Role Variables
 --------------
