@@ -1,12 +1,11 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
 galaxy_info:
-  standalone: true
   author: Arnulf Heimsbakk <aheimsbakk@met.no>
   description: Configure resolv.conf on all Linux
   company: MET Norway
   role_name: dns
-  namespace: met
+  namespace: metno
 
   license: GPLv2
 

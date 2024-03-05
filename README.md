@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `2.2.0` --- Added support for Ubuntu 24.04
 * `2.1.2` --- allow Fedora CoreOS 39
 * `2.1.1` --- bug fix, ansible-lint
 * `2.1.0` --- Initial support for Fedora CoreOS, but with no tests
@@ -36,6 +37,7 @@ This role is limited to:
 * Ubuntu 18.04
 * Ubuntu 20.04
 * Ubuntu 22.04
+* Ubuntu 24.04
 * CentOS 7
 * CentOS Stream 8
 * RHEL 8
