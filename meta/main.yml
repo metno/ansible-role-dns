@@ -1,7 +1,7 @@
 # vim: ai et ts=2 st=2 sw=2 :
 ---
 galaxy_info:
-  author: Arnulf Heimsbakk <aheimsbakk@met.no>
+  author: IT Infrastructure at MET Norway
   description: Configure resolv.conf on all Linux
   company: MET Norway
   role_name: dns
@@ -9,15 +9,14 @@ galaxy_info:
 
   license: GPLv2
 
-  min_ansible_version: "2.12"
+  min_ansible_version: "2.16"
 
   platforms:
     - name: "Ubuntu"
       versions:
+        - "noble"
         - "jammy"
         - "focal"
-        - "bionic"
-        - "xenial"
     - name: "EL"
       versions:
         - "7"

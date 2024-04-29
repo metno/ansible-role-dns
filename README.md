@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `3.0.0` --- Updated for ansible-core 2.16. Removed support for Ubuntu Xenial and Ubuntu Bionic.
 * `2.2.0` --- Added support for Ubuntu 24.04
 * `2.1.2` --- allow Fedora CoreOS 39
 * `2.1.1` --- bug fix, ansible-lint
@@ -33,8 +34,6 @@ Requirements
 
 This role is limited to:
 
-* Ubuntu 16.04
-* Ubuntu 18.04
 * Ubuntu 20.04
 * Ubuntu 22.04
 * Ubuntu 24.04
@@ -103,6 +102,8 @@ GPLv2
 Author Information
 ------------------
 
-Arnulf Heimsbakk <aheimsbakk@met.no>
+Created 2020 by IT Infrastructure at MET Norway
+
+Contactpoint: [IT Infrastructure Basis Team](mailto:it-is-basis@met.no)
 
 ###### set vim: spell spelllang=en:
