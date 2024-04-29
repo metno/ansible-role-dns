@@ -45,7 +45,7 @@
   register: network_manager_running
   check_mode: false
 
-- name: Check if network manager runs
+- name: Check if systemd-resolve runs
   ansible.builtin.shell: pgrep systemd-resolve
   failed_when: false
   changed_when: false
