@@ -1,0 +1,45 @@
+- name: Verify
+  become: true
+  hosts: all
+  gather_facts: true
+  vars:
+    expected_primary_dns: "8.8.8.8"
+    expected_fallback_dns: "1.1.1.1"
+  tasks:
+    - name: Testing RedHat
+      when: ansible_os_family | lower == "redhat"
+      block:
+        - name: Retrieve DNS servers
+          command: cat /etc/resolv.conf
+          register: dns_config
+
+        - name: Parse DNS servers from resolv.conf
+          set_fact:
+            current_dns: "{{ dns_config.stdout | regex_findall('nameserver\\s+(\\S+)') }}"
+
+        - name: Assert DNS settings
+          assert:
+            that:
+              - "'{{ expected_primary_dns }}' in current_dns"
+              - "'{{ expected_fallback_dns }}' in current_dns"
+            fail_msg: "The DNS settings are incorrect. Expected primary DNS: {{ expected_primary_dns }}, fallback DNS: {{ expected_fallback_dns }}. Current DNS: {{ current_dns }}"
+            success_msg: "The DNS settings are correct: {{ current_dns }}"
+
+    - name: Testing RedHat
+      when: ansible_os_family | lower == "debian"
+      block:
+        - name: Retrieve DNS servers using resolvectl
+          command: resolvectl status
+          register: dns_config
+
+        - name: Parse DNS servers from resolvectl output
+          set_fact:
+            current_dns: "{{ dns_config.stdout | regex_findall('DNS Servers:\\s+(\\S+)') }}"
+
+        - name: Assert DNS settings
+          assert:
+            that:
+              - "'{{ expected_primary_dns }}' in current_dns"
+              - "'{{ expected_fallback_dns }}' in current_dns"
+            fail_msg: "The DNS settings are incorrect. Expected primary DNS: {{ expected_primary_dns }}, fallback DNS: {{ expected_fallback_dns }}. Current DNS: {{ current_dns }}"
+            success_msg: "The DNS settings are correct: {{ current_dns }}"
