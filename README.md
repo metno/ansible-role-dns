@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `3.0.1` --- Changed testing to Ansible Molecule
 * `3.0.0` --- Updated for ansible-core 2.16. Removed support for Ubuntu Xenial and Ubuntu Bionic.
 * `2.2.0` --- Added support for Ubuntu 24.04
 * `2.1.2` --- allow Fedora CoreOS 39
@@ -78,21 +79,27 @@ Variables are kept in the `host_vars` or `group_vars` folder usually. Defining e
 Testing
 -------
 
-NOTICE: Fedora CoreOS is tested manually, but currently no automatic tests
-are added for FCOS.
+Testing is done using Ansible Molecule. It uses Vagrant with libvirt as backend.
 
-Testing the role with Vagrant running on VirtualBox.
+To run full test run:
 
-    cd tests
-    vagrant up
+```bash
+molecule test
+```
 
-Rerun tests.
+To run test step by step run:
 
-    vagrant provision
+```bash
+molecule create
+molecule converge
+molecule verify
+molecule destroy
+```
 
-Remove test VMs.
-
-    vagrant destroy -f
+To run toward specific scenario use `-s` option.
+```
+molecule test -s ubuntu
+```
 
 License
 -------
