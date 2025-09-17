@@ -5,41 +5,99 @@
   vars:
     expected_primary_dns: "8.8.8.8"
     expected_fallback_dns: "1.1.1.1"
+    expected_search_domain: "foo.lan"
   tasks:
     - name: Testing RedHat
       when: ansible_os_family | lower == "redhat"
       block:
-        - name: Retrieve DNS servers
-          command: cat /etc/resolv.conf
+        - name: Retrieve DNS servers and search domains
+          ansible.builtin.command: cat /etc/resolv.conf
           register: dns_config
 
         - name: Parse DNS servers from resolv.conf
-          set_fact:
-            current_dns: "{{ dns_config.stdout | regex_findall('nameserver\\s+(\\S+)') }}"
+          ansible.builtin.set_fact:
+            current_dns: >-
+              {{
+                dns_config.stdout_lines
+                | select("match", "^nameserver")
+                | map("split", " ")
+                | map("last")
+                | list
+              }}
 
-        - name: Assert DNS settings
-          assert:
+        - name: Parse search domains from resolv.conf
+          ansible.builtin.set_fact:
+            current_search_domains: >-
+              {{
+                (
+                  dns_config.stdout_lines
+                  | select("match", "^search")
+                  | list | first | default("")
+                  | split(" ")
+                ) | difference(["search"])
+              }}
+
+        - name: Assert DNS server settings
+          ansible.builtin.assert:
             that:
               - "'{{ expected_primary_dns }}' in current_dns"
               - "'{{ expected_fallback_dns }}' in current_dns"
             fail_msg: "The DNS settings are incorrect. Expected primary DNS: {{ expected_primary_dns }}, fallback DNS: {{ expected_fallback_dns }}. Current DNS: {{ current_dns }}"
-            success_msg: "The DNS settings are correct: {{ current_dns }}"
+            success_msg: "The DNS server settings are correct: {{ current_dns }}"
 
-    - name: Testing RedHat
+        - name: Assert search domain setting
+          ansible.builtin.assert:
+            that:
+              - "'{{ expected_search_domain }}' in current_search_domains"
+            fail_msg: "The search domain is incorrect. Expected: {{ expected_search_domain }}. Current search domains: {{ current_search_domains }}"
+            success_msg: "The search domain is correct: {{ expected_search_domain }} is in {{ current_search_domains }}"
+
+    - name: Testing Debian
       when: ansible_os_family | lower == "debian"
       block:
-        - name: Retrieve DNS servers using resolvectl
-          command: resolvectl status
-          register: dns_config
+        - name: Retrieve DNS settings using resolvectl
+          ansible.builtin.command: resolvectl status
+          register: resolvectl_output
 
-        - name: Parse DNS servers from resolvectl output
-          set_fact:
-            current_dns: "{{ dns_config.stdout | regex_findall('DNS Servers:\\s+(\\S+)') }}"
+        - name: Extract and process DNS Servers
+          ansible.builtin.set_fact:
+            current_dns: >-
+              {{
+                resolvectl_output.stdout_lines
+                | select('search', 'DNS Servers:')
+                | map('trim')
+                | map('split', ':')
+                | map('last')
+                | map('split', ' ')
+                | flatten
+                | reject('equalto', '')
+              }}
+
+        - name: Extract and process DNS Domains
+          ansible.builtin.set_fact:
+            current_search_domains: >-
+              {{
+                resolvectl_output.stdout_lines
+                | select('search', 'DNS Domain:')
+                | map('trim')
+                | map('split', ':')
+                | map('last')
+                | map('split', ' ')
+                | flatten
+                | reject('equalto', '')
+              }}
 
         - name: Assert DNS settings
-          assert:
+          ansible.builtin.assert:
             that:
               - "'{{ expected_primary_dns }}' in current_dns"
               - "'{{ expected_fallback_dns }}' in current_dns"
             fail_msg: "The DNS settings are incorrect. Expected primary DNS: {{ expected_primary_dns }}, fallback DNS: {{ expected_fallback_dns }}. Current DNS: {{ current_dns }}"
             success_msg: "The DNS settings are correct: {{ current_dns }}"
+
+        - name: Assert search domain
+          ansible.builtin.assert:
+            that:
+              - "'{{ expected_search_domain }}' in current_search_domains"
+            fail_msg: "The search domain is incorrect. Expected: {{ expected_search_domain }}, Current: {{ current_search_domains }}"
+            success_msg: "The search domain is correctly set to: {{ current_search_domains }}"
