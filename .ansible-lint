@@ -3,3 +3,6 @@ skip_list:
   - command-instead-of-shell
   - '305'
   - role-name[path]
+
+exclude_paths:
+  - molecule/
