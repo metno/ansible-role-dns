@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `3.1.0` --- Added support for RHEL10. The role now supports os_family = redhat.
 * `3.0.1` --- Changed testing to Ansible Molecule
 * `3.0.0` --- Updated for ansible-core 2.16. Removed support for Ubuntu Xenial and Ubuntu Bionic.
 * `2.2.0` --- Added support for Ubuntu 24.04
@@ -33,17 +34,13 @@ Version
 Requirements
 ------------
 
-This role is limited to:
+This role supports
 
-* Ubuntu 20.04
-* Ubuntu 22.04
-* Ubuntu 24.04
+* RedHat Based OS, version 8, 9, 10
+* Ubuntu 20.04, 22.04, and 24.04
 * CentOS 7
 * CentOS Stream 8
-* RHEL 8
-* RHEL 9
-* Fedora CoreOS 38
-* Fedora CoreOS 39
+* Fedora CoreOS version 38, 39
 
 Role Variables
 --------------
