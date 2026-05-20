@@ -9,6 +9,7 @@ Uses `systemd-resolved` or `network-manager` if installed, else it removes `reso
 Version
 -------
 
+* `4.0.1` --- Remove warnings from verify
 * `4.0.0` --- Added support for Resolute Raccoon and remove Focal Fossa
 * `3.1.1` --- Updated molecule test setup
 * `3.1.0` --- Added support for RHEL10. The role now supports os_family = redhat.
