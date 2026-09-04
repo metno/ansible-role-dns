@@ -49,8 +49,14 @@ Role Variables
 --------------
 
 * `dns_servers` --- list of IPs for DNS servers, default `['8.8.8.8', '1.1.1.1']`
-* `dns_dnssec` --- boolean value to enable DNSSEC, default `false`.
+* `dns_dnssec` --- controls DNSSEC validation, default `false`.
     DNSSEC is only configured for `systemd-resolved`.
+    Accepts `true` and `false`, and the string `allow-downgrade`.
+    With `true`, `systemd-resolved` fails closed: if it decides the upstream server
+    does not handle DNSSEC properly it marks it `incompatible-server` and returns
+    SERVFAIL for every name, so resolution stops completely.
+    With `allow-downgrade` it attempts validation and turns DNSSEC off for that
+    server instead of failing.
 * `dns_domains` --- list of search domains, default `[]`
 
 Dependencies
