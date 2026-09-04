@@ -27,7 +27,9 @@
     path: /etc/systemd/resolved.conf
     section: Resolve
     option: DNSSEC
-    value: '{{ "yes" if dns_dnssec else "no" }}'
+    value: >-
+      {{ 'allow-downgrade' if dns_dnssec == 'allow-downgrade'
+         else ('yes' if dns_dnssec | bool else 'no') }}
     mode: '0644'
     no_extra_spaces: true
   register: conf_dnssec
